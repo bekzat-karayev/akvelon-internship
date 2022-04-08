@@ -1,0 +1,1 @@
+# My solutions for Week 1 tasks
