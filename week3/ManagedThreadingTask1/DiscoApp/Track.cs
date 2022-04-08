@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace DiscoApp
 {
-    internal class Track
+    public class Track
     {
+        public string Name { get; set; }
+        public string Style { get; set; }
+
+        public Track(string name, string style)
+        {
+            this.Name = name;
+            this.Style = style; 
+        }
     }
 }

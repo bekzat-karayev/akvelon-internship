@@ -1,65 +1,54 @@
 ﻿using System.Threading;
 using System;
-namespace ThreadingDemo
+namespace DiscoApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Main Thread Started");
-            //Creating Threads
-            Thread t1 = new Thread(Method1)
+            Console.WriteLine("Disco opens");
+            Thread.Sleep(1000);
+            Console.WriteLine("Dancers enter disco");
+            Thread.Sleep(1000);
+            Console.WriteLine("DJ creates tracklist");
+            Thread.Sleep(1000);
+            var tracklist = CreateTracklist();
+            foreach (var track in tracklist)
             {
-                Name = "Thread1"
-            };
-            Thread t2 = new Thread(Method2)
-            {
-                Name = "Thread2"
-            };
-            Thread t3 = new Thread(Method3)
-            {
-                Name = "Thread3"
-            };
-            //Executing the methods
-            t1.Start();
-            t2.Start();
-            t3.Start();
-            Console.WriteLine("Main Thread Ended");
-            Console.Read();
-        }
-        static void Method1()
-        {
-            Console.WriteLine("Method1 Started using " + Thread.CurrentThread.Name);
-            for (int i = 1; i <= 5; i++)
-            {
-                Console.WriteLine("Method1 :" + i);
+                PlayMusic(track);
+                Thread.Sleep(2000);
             }
-            Console.WriteLine("Method1 Ended using " + Thread.CurrentThread.Name);
+            Console.WriteLine("Tracklist has ended");
+            Thread.Sleep(1000);
+            Console.WriteLine("Dancers go home");
+            Console.ReadKey();
         }
-        static void Method2()
+
+        static List<Track> CreateTracklist()
         {
-            Console.WriteLine("Method2 Started using " + Thread.CurrentThread.Name);
-            for (int i = 1; i <= 5; i++)
+            var newTracklist = new List<Track>();
+            for (int i = 1; i < 11; i++)
             {
-                Console.WriteLine("Method2 :" + i);
-                if (i == 3)
-                {
-                    Console.WriteLine("Performing the Database Operation Started");
-                    //Sleep for 10 seconds
-                    Thread.Sleep(10000);
-                    Console.WriteLine("Performing the Database Operation Completed");
-                }
+                newTracklist.Add(GenerateTrack(i));
             }
-            Console.WriteLine("Method2 Ended using " + Thread.CurrentThread.Name);
+
+            return newTracklist;
         }
-        static void Method3()
+
+        static Track GenerateTrack(int id)
         {
-            Console.WriteLine("Method3 Started using " + Thread.CurrentThread.Name);
-            for (int i = 1; i <= 5; i++)
-            {
-                Console.WriteLine("Method3 :" + i);
-            }
-            Console.WriteLine("Method3 Ended using " + Thread.CurrentThread.Name);
+            var musicStyles = new List<string>() { "Latino", "Hardbass", "Rock" };
+            var random = new Random();
+            var track = new Track("Track " + id,
+                musicStyles[random.Next(musicStyles.Count)]);
+
+            return track;
+        }
+
+        static void PlayMusic(Track track)
+        {
+            Console.WriteLine("Now DJ plays " + track.Name 
+                + " in " + track.Style + " style");
         }
     }
 }
