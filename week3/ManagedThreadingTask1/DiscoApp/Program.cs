@@ -13,10 +13,18 @@ namespace DiscoApp
             Console.WriteLine("DJ creates tracklist");
             Thread.Sleep(1000);
             var tracklist = CreateTracklist();
+
             foreach (var track in tracklist)
             {
                 PlayMusic(track);
-                Thread.Sleep(2000);
+                for (int i = 1; i < 6; i++)
+                {
+                    Thread thread = new Thread(Dance) { Name = "Dancer " + i };
+                    thread.Start();
+                    //thread.Join();
+                }
+
+                Thread.Sleep(1000);
             }
             Console.WriteLine("Tracklist has ended");
             Thread.Sleep(1000);
@@ -47,8 +55,15 @@ namespace DiscoApp
 
         static void PlayMusic(Track track)
         {
-            Console.WriteLine("Now DJ plays " + track.Name 
+            Console.WriteLine("Now DJ plays " + track.Name
                 + " in " + track.Style + " style");
+        }
+
+        static void Dance()
+        {
+            Thread.Sleep(500);
+            string bodyPart = "hips";
+            Console.WriteLine(Thread.CurrentThread.Name + " is moving " + bodyPart);
         }
     }
 }
