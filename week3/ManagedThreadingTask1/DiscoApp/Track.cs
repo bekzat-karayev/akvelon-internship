@@ -11,6 +11,7 @@ namespace DiscoApp
         public string Name { get; set; }
         public string Style { get; set; }
 
+        // Instance of a track must have both properties defined
         public Track(string name, string style)
         {
             this.Name = name;
