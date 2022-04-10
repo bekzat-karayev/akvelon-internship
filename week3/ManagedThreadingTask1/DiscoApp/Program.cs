@@ -7,7 +7,6 @@ namespace DiscoApp
     {
         // Here we can set up quantity of music tracks, dancers, as well as 
         // length of tracks and delays between console messages in milliseconds
-
         public const int TrackCount = 20;
         public const int DancerCount = 10;
         public const int DefaultDelay = 1000;
@@ -30,6 +29,12 @@ namespace DiscoApp
             foreach (var track in tracklist)
             {
                 PlayMusic(track);
+
+                // This is a simple implementation of "dancers",
+                // each dancer is a separate thread. 
+                // Every time new track is played new threads-dancers are created from scratch
+                // although console messages show as if they are the same as before. 
+                // Obviously reusable threads could be implemented using ThreadPools
                 for (int i = 1; i <= DancerCount; i++)
                 {
                     Thread thread = new Thread(Dance) { Name = "Dancer " + i };
