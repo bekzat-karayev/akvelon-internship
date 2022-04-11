@@ -3,7 +3,7 @@ using System;
 
 namespace DiscoApp
 {
-    class Program
+    public class Program
     {
         // Here we can set up quantity of music tracks, dancers, as well as 
         // length of tracks and delays between console messages in milliseconds
@@ -16,7 +16,16 @@ namespace DiscoApp
         // in order to speed up app execution it is set to 3 secs
         public const int TrackLength = 3000;
 
-        static void Main()
+        public static void Main()
+        {
+            OpenDisco();
+            var tracklist = CreateTracklist();
+            PlayMusic(tracklist);
+            CloseDisco();
+            Console.ReadKey();
+        }
+
+        public static void OpenDisco()
         {
             Console.WriteLine("Disco opens");
             Thread.Sleep(DefaultDelay);
@@ -24,11 +33,13 @@ namespace DiscoApp
             Thread.Sleep(DefaultDelay);
             Console.WriteLine("DJ creates tracklist");
             Thread.Sleep(DefaultDelay);
-            var tracklist = CreateTracklist();
+        }
 
+        public static void PlayMusic(List<Track> tracklist)
+        {
             foreach (var track in tracklist)
             {
-                PlayMusic(track);
+                PlayTrack(track);
 
                 // This is a simple implementation of "dancers",
                 // each dancer is a separate thread. 
@@ -43,15 +54,19 @@ namespace DiscoApp
 
                 Thread.Sleep(TrackLength);
             }
+
+        }
+
+        public static void CloseDisco()
+        {
             Console.WriteLine("Tracklist has ended");
             Thread.Sleep(DefaultDelay);
             Console.WriteLine("Dancers go home");
             Thread.Sleep(DefaultDelay);
             Console.WriteLine("Press any key to close the disco");
-            Console.ReadKey();
         }
 
-        static List<Track> CreateTracklist()
+        public static List<Track> CreateTracklist()
         {
             var newTracklist = new List<Track>();
             for (int i = 1; i <= TrackCount; i++)
@@ -65,7 +80,7 @@ namespace DiscoApp
         // Music tracks are generated from scratch each time a playlist is created
         // They have generic names (e.g. "Track 7") and music style,
         // that is assigned randomly
-        static Track GenerateTrack(int id)
+        public static Track GenerateTrack(int id)
         {
             var musicStyles = new List<string>() { "Latino", "Hardbass", "Rock" };
             var random = new Random();
@@ -75,7 +90,7 @@ namespace DiscoApp
             return track;
         }
 
-        static void PlayMusic(Track track)
+        public static void PlayTrack(Track track)
         {
             Console.WriteLine("Now DJ plays " + track.Name
                 + " in " + track.Style.ToUpper() + " style");
@@ -83,7 +98,7 @@ namespace DiscoApp
 
         // This method contains logic, by which "dancers" know what style of music is played
         // and what bodypart they should "move" 
-        static void Dance(object? trackObj)
+        public static void Dance(object? trackObj)
         {
             if (trackObj is Track track)
             {
