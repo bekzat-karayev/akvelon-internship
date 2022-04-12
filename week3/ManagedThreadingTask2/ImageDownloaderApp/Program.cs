@@ -9,7 +9,8 @@ namespace ImageDownloaderApp
     public class Program
     {
 
-        public const string WebsiteUrl = "https://www.google.com/";
+        public const string WebsiteUrl = "https://172.67.131.170/photos";
+        //public const string WebsiteUrl = "https://www.ipify.org/";
         public static void Main()
         {
             Console.WriteLine("Start");
@@ -19,10 +20,18 @@ namespace ImageDownloaderApp
 
         public static async void CheckConnection()
         {
-            HttpClient client = new HttpClient();
-            var checkingResponse = await client.GetAsync(WebsiteUrl);
-            Console.WriteLine(checkingResponse.StatusCode);
-
+            using var client = new WebClient();
+            WebProxy proxy = new WebProxy("192.168.1.1");
+            var response = client.DownloadString(WebsiteUrl);
+            if (!string.IsNullOrEmpty(response))
+            {
+                Console.WriteLine(response);
+            }
+            else
+            {
+                Console.WriteLine("sucka");
+            }
         }
+
     }
 }
