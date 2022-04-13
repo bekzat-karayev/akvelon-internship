@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -9,25 +10,40 @@ namespace ImageDownloaderApp
     public class Program
     {
 
-        public const string WebsiteUrl = "https://172.67.131.170/photos";
-        //public const string WebsiteUrl = "https://www.ipify.org/";
+        public const string WebsiteUrl = "https://jsonplaceholder.typicode.com/photos";
+
+        // I had trouble accessing website above without using VPN, so I Implemented reading
+        // from file information about photos that need to be downloaded 
+        public const string PhotosInfoFilename = "photos.json";
+        
         public static void Main()
         {
             Console.WriteLine("Start");
-            CheckConnection();
+            CheckPhotosInfoJson();
             Console.ReadKey();
         }
 
-        public static async void CheckConnection()
+        // Checks whether photos.json file exists inside Debug folder, 
+        // if not creates new file and writes to it information about photos
+        // from jsonplaceholder.typicode.com/photos
+        public static void CheckPhotosInfoJson()
+        {
+            if (!File.Exists(PhotosInfoFilename))
+            {
+                DownloadPhotosInfo();
+            }
+            else { Console.WriteLine("we have him"); };
+        }
+
+        public static void DownloadPhotosInfo()
         {
             using var client = new WebClient();
-            WebProxy proxy = new WebProxy("192.168.1.1");
-            var response = client.DownloadString(WebsiteUrl);
-            if (!string.IsNullOrEmpty(response))
+            ;
+            try 
             {
-                Console.WriteLine(response);
+                client.DownloadFile(WebsiteUrl, "photos.json");
             }
-            else
+            catch
             {
                 Console.WriteLine("sucka");
             }
