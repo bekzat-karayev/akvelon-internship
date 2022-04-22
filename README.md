@@ -31,6 +31,10 @@ Below are available contents of each folder (* - need more work)
 3. [Thread Synchronization Task 1](../master/week3/ThreadSynchronizationTask1) 
 4. [Thread Synchronization Task 2 *](../master/week3/ThreadSynchronizationTask2) 
 ## Week 4
-1. []
+1. [TPL Task 1 *](../master/week4/TPLTask1)
+1. [TPL Task 2 *](../master/week4/TPLTask2)
+1. [Async Task 1 *](../master/week4/AsyncTask1)
+1. [Async Task 2 *](../master/week4/AsyncTask2) 
 ## Week 5
-1. empty
+1. [SQL Task 1 *](../master/week4/SQLTask1)
+2. ...
