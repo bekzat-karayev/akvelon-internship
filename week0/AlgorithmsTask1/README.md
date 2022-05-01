@@ -24,6 +24,13 @@ Input: nums = [1]
 Output: 1
 ```
 
+**Constraints:**
+
+* 1 <= nums.length <= 3 * 10^4
+* -3 * 104 <= nums[i] <= 3 * 10^4
+* Each element in the array appears twice except for one element which appears only once.
+
+
 ### Comments
 
 Code comments and unit tests are provided.
