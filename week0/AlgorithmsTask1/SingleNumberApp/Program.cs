@@ -2,11 +2,15 @@
 
 namespace SingleNumberApp
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+        }
+
+        public static int GetNonRepeatedNumber(int[] nums)
+        { 
+            return nums.Length;
         }
     }
 }
