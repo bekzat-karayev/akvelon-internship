@@ -6,15 +6,27 @@ Given a non-empty array of integers nums, every element appears twice except for
 
 You must implement a solution with a linear runtime complexity and use only constant extra space.
 
-**Example1**
+**Example 1**
 ```
-**Input:** nums = [2,2,1]
-**Output:** 1
+Input: nums = [2,2,1]
+Output: 1
+```
+
+**Example 2**
+```
+Input: nums = [4,1,2,1,2]
+Output: 4
+```
+
+**Example 3**
+```
+Input: nums = [1]
+Output: 1
 ```
 
 ### Comments
 
 Code comments and unit tests are provided.
 
-[Link to original description](https://github.com/Rust1k/Internship-.NET-/blob/main/week%203/Managed%20threading%20task.md)
+[Link to original description on Leetcode.com](https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/549/)
 
