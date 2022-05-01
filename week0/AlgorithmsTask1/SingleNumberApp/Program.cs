@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace SingleNumberApp
 {
@@ -11,22 +12,28 @@ namespace SingleNumberApp
 
         public static int GetNonRepeatedNumber(int[] nums)
         {
-            var uniqueNums = new List<int>();
-            uniqueNums.Add(nums[0]);
-
-            for (int index = 1; index < nums.Length; index++)
+            var numsTable = new Hashtable();
+            for (int index = 0; index < nums.Length; index++)
             {
-                if (uniqueNums.Contains(nums[index]))
+                if (!numsTable.ContainsKey(nums[index]))
                 {
-                    uniqueNums.Remove(nums[index]);
+                    numsTable.Add(nums[index], "1");
                 }
                 else
                 {
-                    uniqueNums.Add(nums[index]);
+                    numsTable[nums[index]] = "2";
                 }
             }
 
-            return uniqueNums.First();
+            foreach (DictionaryEntry pair in numsTable)
+            {
+                if (pair.Value.ToString() == "1")
+                {
+                    return (int)pair.Key;
+                }
+            }
+
+            return nums[0];
         }
     }
 }
